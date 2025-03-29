@@ -22,7 +22,7 @@ app.use('/api/auth' , authRouter);
 //!3.connection with database
 mongoose
   // .connect("mongodb://127.0.0.1:27017/authentication")   //using with local mongo setup
-  .connect(process.env.MONGO_URI)     // use with docker
+  .connect(process.env.MONGO_URI)     // use with docker setup
 
     .then(() => console.log("Connection to database successfully done "))
     .catch((error) => console.error("Failed to connect to mongoDB", error));
