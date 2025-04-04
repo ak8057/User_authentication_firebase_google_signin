@@ -1,0 +1,19 @@
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Copy package files first to install dependencies
+COPY package*.json ./
+RUN npm install
+
+# Copy the rest of the app
+COPY . .
+
+# Build the app
+RUN npm run build
+
+# Use 'serve' to serve the static files
+RUN npm install -g serve
+CMD ["serve", "-s", "dist"]
+
+EXPOSE 3000

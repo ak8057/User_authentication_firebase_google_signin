@@ -44,21 +44,23 @@ const Profile = () => {
   };
 
   return (
-    <div className="profile-container">
+    <div className="text-center p-5">
       {userDetails ? (
         <>
-          <div className="profile-image">
+          <div className="flex justify-center mb-4">
             {userDetails?.photo ? (
               <img
                 src={userDetails.photo}
                 alt="Profile"
-                className="profile-pic"
+                className="w-[120px] h-[120px] rounded-full border-2 border-blue-500 object-cover"
                 width="40%"
                 style={{ borderRadius: "50%" }}
                 onLoad={() => console.log("Image loaded successfully!")}
                 onError={(e) => {
-                  console.error("Error loading image:", userDetails?.photo);
-                  e.target.src = "https://via.placeholder.com/150"; // Fallback image
+                  if (e.target.src !== "https://via.placeholder.com/150") {
+                    console.error("Error loading image:", userDetails?.photo);
+                    e.target.src = "https://via.placeholder.com/150"; // fallback
+                  }
                 }}
               />
             ) : (
@@ -66,12 +68,15 @@ const Profile = () => {
             )}
           </div>
           <h3>Welcome, {userDetails.firstName} 🙏</h3>
-          <div className="profile-details">
+          <div className="text-sm text-gray-600">
             <p>Email: {userDetails.email}</p>
             <p>First Name: {userDetails.firstName}</p>
             {/* <p>Last Name: {userDetails.lastName}</p> */}
           </div>
-          <button className="btn btn-primary" onClick={handleLogout}>
+          <button
+            className="mt-4 px-4 py-2 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600"
+            onClick={handleLogout}
+          >
             Logout
           </button>
         </>

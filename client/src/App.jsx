@@ -7,6 +7,7 @@ import Register from "./Auth/Register";
 import { useAuth } from "./contexts/AuthContext";
 import { Navigate } from "react-router-dom";
 import Profile from "./Pages/Profile.jsx";
+import Homepage from "./Pages/Homepage.jsx";
 const App = () => {
   const { isAuthenticated } = useAuth();
   return (
@@ -14,6 +15,12 @@ const App = () => {
       <Routes>
         <Route
           path="/"
+          element={
+            <Homepage />
+          }
+        />
+        <Route
+          path="/register"
           element={
             !isAuthenticated ? <Register /> : <Navigate to="/dashboard" />
           }
